@@ -442,24 +442,22 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	border: 1px solid;
-	border-color: #ccc #ccc #bbb;
-	border-radius: 3px;
-	background: #e6e6e6;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 15px 17px rgba(255, 255, 255, 0.5), inset 0 -5px 12px rgba(0, 0, 0, 0.05);
-	color: rgba(0, 0, 0, .8);
+	border-color: #ffffff;
+	border-radius: 0;
+	background: transparent;
+        color: #404040;
+        font-family: 'Dosis', sans-serif;
 	font-size: 12px;
 	font-size: 0.75rem;
 	line-height: 1;
 	padding: .6em 1em .4em;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
-	border-color: #ccc #bbb #aaa;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 15px 17px rgba(255, 255, 255, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0.02);
+	border-color: #eaeaea;
 }
 
 button:focus,
@@ -470,8 +468,8 @@ button:active,
 input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active {
-	border-color: #aaa #bbb #bbb;
-	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15);
+	border-color: #404040;
+	color: #fff;
 }
 
 input[type="text"],
@@ -621,30 +619,31 @@ a:active {
 }
 
 .dropdown-toggle {
-	background-color: transparent;
-	border: 0;
-	-webkit-box-sizing: content-box;
+	position: absolute;
+        height: 27px;
+        width: 27px;
+        top: 12px;
+        right: 6px;
+        -webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	content: "";
-	height: 42px;
 	padding: 0;
-	position: absolute;
+        background-color: transparent;
+	border: 0;
+	font-family: 'Font Awesome';
+	content: "";
+        color: #404040;
 	text-transform: lowercase; /* Stop screen readers to read the text as capital letters */
-	top: 3px;
-	right: 0;
-	width: 42px;
 }
 
 .dropdown-toggle:after {
-	color: #333;
-	content: "\f431";
-	font-size: 24px;
-	line-height: 42px;
+	content: "\f078";
+	font-size: 14px;
+	line-height: 27px;
 	position: relative;
 	top: 0;
 	left: 1px;
-	width: 42px;
+	width: 27px;
 }
 
 .dropdown-toggle:hover,
@@ -659,7 +658,7 @@ a:active {
 }
 
 .dropdown-toggle.toggle-on:after {
-	content: "\f432";
+	content: "\f077";
 }
 
 
@@ -669,7 +668,28 @@ a:active {
 	display: block;
 }
 
-@media screen and (min-width: 37.5em) {
+.menu-toggle {
+    position: fixed;
+    z-index: 100;
+    top: 1em;
+    right: 1em;
+    font-size: 1em;
+    text-transform: uppercase;
+    background-color: #fff;
+    color: #404040;
+    transition: all ease-out 400ms;
+}
+.menu-toggle.hide {
+    top: -2.5em;
+    
+}
+
+/* Make sure the menu button doesn't hide when the Menu is open */
+.toggled .menu-toggle.hide {
+    top: 2em;
+}
+
+@media screen and (min-width: 50em) {
 	.menu-toggle {
 		display: none;
 	}
@@ -699,6 +719,140 @@ a:active {
 	text-align: right;
 	width: 50%;
 }
+
+/* Hovering Menu */
+.main-navigation.toggled {
+    position: fixed;
+    top: 0;
+    padding: 1em;
+    z-index: 1;
+}
+
+.nav-menu {
+    padding: 1em;
+    margin-top: 3em;
+    margin-bottom: 1em;
+    background-color: #fff;
+}
+
+.main-navigation.toggled ul {
+    max-height: clalc(100vh - 8em);
+    overflow-y: auto;
+}
+
+.main-navigation.toggled ul ul {
+    display: none;
+}
+
+.main-navigation.toggled ul ul.toggled-on, 
+.main-navigation.toggled ul ul.toggled-on > ul {
+    display: block;
+}
+
+/* Horizontal menu on wide screens */
+@media screen and (min-width: 50em) {
+	
+	/* Position the menu in the header */
+	.main-navigation,
+	.main-navigation.toggled {
+		position: relative;
+		min-height: 3.5em;
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 4em;
+		background-color: #fff;
+               
+	}
+	
+	.nav-menu { 
+		padding: .3em 0 0 0;
+		background-color: transparent;
+	}
+        
+	
+	.main-navigation ul,
+	.main-navigation.toggled ul {
+		max-height: none;
+		padding-left: 0;
+		text-align: right;
+	}
+	
+	.main-navigation.toggled ul {
+		overflow-y: visible;
+	}
+	
+	/* Display the menu items in a horizontal order */
+	.main-navigation li {
+		display: inline-block;
+		border: none;
+	}
+	
+/*	 Add an outline to the drop-down menus 
+	.main-navigation ul ul {
+		outline: 1px solid #333;
+	}
+	*/
+	/* Left-align drop-down menu items */
+	.main-navigation li li {
+		display: block;
+		text-align: left;
+	}
+	
+	.main-navigation a,
+	.main-navigation ul ul li:last-child a {
+		border-bottom: none;
+	}
+	
+	/* Add an outline on hovered and focused menu items */
+	.main-navigation a:hover,
+	.main-navigation a:focus {
+		background: transparent;
+		color: #ff675b;
+		text-decoration: none;
+/*		outline: solid 1px #b3b3b3;*/
+	}
+	
+	/* Create hover and focus contrast on drop-down items */
+	.main-navigation li li a:hover,
+	.main-navigation li li a:focus {
+		background: #fff;
+		color: #ff675b;
+		text-decoration: none;
+	}
+	
+	/* Position drop-down menus absolutely */
+	.main-navigation ul ul.toggled-on {
+		position: absolute;
+		width: 12em;
+		display: block;
+		z-index: 10;
+		margin-left: 0;
+		background: #eaeaea;
+	}
+	
+	.main-navigation ul ul ul.toggled-on {
+		position: relative;
+	}
+	
+	/* Indent 3rd level drop-down menus */
+	.main-navigation ul ul ul a {
+		padding-left: 2em;
+	}
+	
+	/* Simplify the drop-down toggle */
+	.dropdown-toggle {
+		top: 11px;
+		right: 12px;
+		border: none;
+	}
+	
+	.dropdown-toggle::after {
+		line-height: 27px;
+		width: 27px;
+	}
+	
+}
+
 
 /*--------------------------------------------------------------
 # Accessibility

@@ -47,7 +47,7 @@
 	subMenus = menu.getElementsByTagName( 'ul' );
 
 	// Set menu items with submenus to aria-haspopup="true".
-	for ( i = 0, len = subMenus.length; i < len; i++ ) {
+	for ( var i = 0, len = subMenus.length; i < len; i++ ) {
 		subMenus[i].parentNode.setAttribute( 'aria-haspopup', 'true' );
 	}
 
@@ -110,4 +110,29 @@
 			});
 		}
 	});
+        
+        // Hide/show toggle button on scroll
+
+	var position, direction, previous;
+
+	$(window).scroll(function(){
+		if( $(this).scrollTop() >= position ){
+			direction = 'down';
+			if(direction !== previous){
+				$('.menu-toggle').addClass('hide');
+				
+				previous = direction;
+			}
+		} else {
+			direction = 'up';
+			if(direction !== previous){
+				$('.menu-toggle').removeClass('hide');
+				
+				previous = direction;
+			}
+		}
+		position = $(this).scrollTop();
+	});
+
+        
 } )( jQuery );

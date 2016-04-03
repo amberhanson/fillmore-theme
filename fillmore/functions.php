@@ -108,6 +108,9 @@ function fillmore_scripts() {
 	//Add Google Fonts
         wp_enqueue_style('fillmore-google-fonts', 'https://fonts.googleapis.com/css?family=Dosis:400,500,700,300,200|Merriweather:400,700,700italic,400italic|Open+Sans:400,700,400italic,700italic');
 
+        // Add Font Awesome icons (http://fontawesome.io) 
+	wp_enqueue_style( 'fillmore-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );
+	
 	wp_enqueue_script( 'fillmore-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery' ), '20120206', true );
 	wp_localize_script( 'fillmore-navigation', 'screenReaderText', array(
 		'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', 'fillmore' ) . '</span>',

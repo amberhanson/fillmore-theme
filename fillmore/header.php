@@ -8,7 +8,6 @@
  *
  * @package fillmore
  */
-
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -29,6 +28,30 @@
         <?php } else { ?>
             <header id="masthead" class="site-header" role="banner">
         <?php } ?>
+                
+                <?php // Display site icon or first letter as logo ?>	
+		<div class="site-logo">
+			<?php $site_title = get_bloginfo( 'name' ); ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+				<div class="screen-reader-text">
+					<?php printf( esc_html__('Go to the home page of %1$s', 'fillmore'), $site_title ); ?>	
+				</div>
+                            <?php 
+                            if (has_site_icon() ) {
+                                $site_icon = esc_url( get_site_icon_url( 270 ) ); ?>
+                            <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
+                            <?php } else { ?>
+				<div class="site-firstletter" aria-hidden="true">
+					<?php echo substr($site_title, 0, 1); ?>
+				</div>
+                            <?php } ?>
+			</a>
+		</div>
+                
+                <nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'fillmore' ); ?></button>
+			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'main-navigation' ) ); ?>
+		</nav><!-- #site-navigation -->
             
             
 		<div class="site-branding">
@@ -39,7 +62,6 @@
 				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 			<?php
 			endif;
-
 			$description = get_bloginfo( 'description', 'display' );
 			if ( $description || is_customize_preview() ) : ?>
 				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
@@ -47,10 +69,7 @@
 			endif; ?>
 		</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'fillmore' ); ?></button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav><!-- #site-navigation -->
+		
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">
